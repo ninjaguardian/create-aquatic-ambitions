@@ -3,9 +3,7 @@ package net.davio.aquaticambitions;
 import com.mojang.logging.LogUtils;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
-import net.davio.aquaticambitions.entry.CCAPartials;
-import net.davio.aquaticambitions.entry.CCARecipeTypes;
-import net.davio.aquaticambitions.entry.CCATags;
+import net.davio.aquaticambitions.entry.*;
 import net.davio.aquaticambitions.kinetics.fan.processing.CCAFanProcessingTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -26,17 +24,21 @@ public class CreateAquaticAmbitions
 {
     public static final String MODID = "create_aquatic_ambitions";
     private static final Logger LOGGER = LogUtils.getLogger();
-    public static final NonNullSupplier<CreateRegistrate> REGISTRATE =
-            NonNullSupplier.lazy(() -> CreateRegistrate.create(MODID));
+
+    public static final CreateRegistrate REGISTRATE = CreateRegistrate.create(CreateAquaticAmbitions.MODID);
+
     public CreateAquaticAmbitions() {
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        REGISTRATE.registerEventListeners(eventBus);
+
         CCATags.setRegister();
+        CCACreativeModeTab.register(eventBus);
+        CCABlocks.register();
+        CCAItems.register();
         CCARecipeTypes.register(eventBus);
         CCAFanProcessingTypes.register();
         CCAPartials.init();
-
-        REGISTRATE.get().registerEventListeners(eventBus);
 
         eventBus.addListener(this::commonSetup);
 

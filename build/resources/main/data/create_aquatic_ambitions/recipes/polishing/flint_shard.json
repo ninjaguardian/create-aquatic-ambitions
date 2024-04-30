@@ -1,5 +1,5 @@
 {
-  "type": "create_aquatic_ambitions:channeling",
+  "type": "create:sandpaper_polishing",
   "ingredients": [
     {
       "item": "minecraft:flint"
@@ -7,7 +7,7 @@
   ],
   "results": [
     {
-      "item": "minecraft:prismarine_shard"
+      "item": "create_aquatic_ambitions:flint_shard"
     }
   ]
 }
