@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "create_aquatic_ambitions",
+  "version": "${version}",
+  "name": "Create Aquatic Ambitions",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "Me!"
+  ],
+  "contact": {
+    "sources": "https://github.com/davioliva16/create-aquatic-ambitions"
+  },
+  "license": "MIT",
+  "icon": "assets/create_aquatic_ambitions/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.davio.create_aquatic_ambitions.CreateAquaticAmbitons"
+    ]
+  },
+  "mixins": [
+    "create_aquatic_ambitions.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric-api": ">=${fabric_api_version}",
+    "create": "${create_version}",
+    "minecraft": "${minecraft_version}"
+  }
+}
