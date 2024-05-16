@@ -1,6 +1,6 @@
 package net.davio.create_aquatic_ambitions.mixin;
 
-import net.davio.create_aquatic_ambitions.CreateAquaticAmbitons;
+import net.davio.create_aquatic_ambitions.CreateAquaticAmbitions;
 
 import net.minecraft.client.Minecraft;
 
@@ -15,6 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MinecraftMixin {
 	@Inject(method = "<init>", at = @At("TAIL"))
 	private void example$init(GameConfig gameConfig, CallbackInfo ci) {
-		CreateAquaticAmbitons.LOGGER.info("Hello from {}", CreateAquaticAmbitons.NAME);
+		CreateAquaticAmbitions.LOGGER.info("Hello from {}", CreateAquaticAmbitions.NAME);
 	}
 }

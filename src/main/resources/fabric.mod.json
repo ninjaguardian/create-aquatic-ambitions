@@ -11,11 +11,11 @@
     "sources": "https://github.com/davioliva16/create-aquatic-ambitions"
   },
   "license": "MIT",
-  "icon": "assets/create_aquatic_ambitions/icon.png",
+  "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.davio.create_aquatic_ambitions.CreateAquaticAmbitons"
+      "net.davio.create_aquatic_ambitions.CreateAquaticAmbitions"
     ]
   },
   "mixins": [
