@@ -21,6 +21,7 @@ version = "${mod_version}+${minecraft_version}" + (buildNumber != null ? "-${bui
 repositories {
 	maven { url = "https://maven.shedaniel.me/" } // Cloth Config, REI
 	maven { url = "https://maven.blamejared.com/" } // JEI
+	maven { url = "https://modmaven.dev"} //JEI Backup
 	maven { url = "https://maven.parchmentmc.org" } // Parchment mappings
 	maven { url = "https://maven.quiltmc.org/repository/release" } // Quilt Mappings
 	maven { url = "https://api.modrinth.com/maven" } // LazyDFU
@@ -69,7 +70,7 @@ dependencies {
 		default: println("Unknown recipe viewer specified: ${recipe_viewer}. Must be JEI, REI, EMI, or disabled.")
 	}
 	// if you would like to add integration with them, uncomment them here.
-//    modCompileOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_fabric_version}")
+	modCompileOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}")
 //    modCompileOnly("mezz.jei:jei-${minecraft_version}-common:${jei_fabric_version}")
 //    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}")
 //    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}")

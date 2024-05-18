@@ -16,6 +16,9 @@
   "entrypoints": {
     "main": [
       "net.davio.create_aquatic_ambitions.CreateAquaticAmbitions"
+    ],
+    "jei_mod_plugin": [
+      "net.davio.create_aquatic_ambitions.compat.jei.CCAJEI"
     ]
   },
   "mixins": [

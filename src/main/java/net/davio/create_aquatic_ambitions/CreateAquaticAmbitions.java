@@ -8,6 +8,10 @@ import io.github.fabricators_of_create.porting_lib.util.EnvExecutor;
 import net.davio.create_aquatic_ambitions.entry.CCABlocks;
 import net.davio.create_aquatic_ambitions.entry.CCACreativeModeTab;
 import net.davio.create_aquatic_ambitions.entry.CCAItems;
+import net.davio.create_aquatic_ambitions.entry.CCAPartials;
+import net.davio.create_aquatic_ambitions.entry.CCARecipeTypes;
+import net.davio.create_aquatic_ambitions.entry.CCATags;
+import net.davio.create_aquatic_ambitions.kinetics.fan.processing.CCAFanProcessingTypes;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 
@@ -16,7 +20,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CreateAquaticAmbitions implements ModInitializer, ClientModInitializer {
+public class CreateAquaticAmbitions implements ModInitializer {
 	public static final String MODID = "create_aquatic_ambitions";
 	public static final String NAME = "Create: Aquatic Ambitions";
 	public static final Logger LOGGER = LoggerFactory.getLogger(NAME);
@@ -31,21 +35,15 @@ public class CreateAquaticAmbitions implements ModInitializer, ClientModInitiali
 				() -> () -> "{} is accessing Porting Lib from the server!"
 		), NAME);
 
+		CCATags.setRegister();
 		CCABlocks.register();
 		CCAItems.register();
-		//Recipe Register
-		//Fan Register
+		CCARecipeTypes.register();
+		CCAFanProcessingTypes.register();
 		CCACreativeModeTab.register();
-
+		CCAPartials.init();
 		REGISTRATE.register();
 	}
-
-	@Override
-	public void onInitializeClient() {
-		//Partials Register
-		//Lootables
-	}
-
 
 	public static ResourceLocation asResource(String path) {
 		return new ResourceLocation(MODID,path);
