@@ -41,7 +41,7 @@ public class CreateAquaticAmbitions implements ModInitializer {
 		CCARecipeTypes.register();
 		CCAFanProcessingTypes.register();
 		CCACreativeModeTab.register();
-		CCAPartials.init();
+		//CCAPartials.init();
 		REGISTRATE.register();
 	}
 

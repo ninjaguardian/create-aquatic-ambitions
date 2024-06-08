@@ -17,6 +17,9 @@
     "main": [
       "net.davio.create_aquatic_ambitions.CreateAquaticAmbitions"
     ],
+    "client": [
+      "net.davio.create_aquatic_ambitions.CreateAquaticAmbitionsClient"
+    ],
     "jei_mod_plugin": [
       "net.davio.create_aquatic_ambitions.compat.jei.CCAJEI"
     ]
