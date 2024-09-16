@@ -14,3 +14,5 @@ JEI is reccommended but not required!
 Also, I noticed you still use the default template license. Do you want it like that?
 Also, some small improvements that you can choose if you want. Post releases in github, setup an update checker with modmenu (i think), show license on modrinth, make a wiki and make modrinth link to it, setup a cool readme (look at mine, for example) https://github.com/ninjaguardian/Crystallized, check https://github.com/davioliva16/create-aquatic-ambitions/community.
 Also setup gradle tasks and worksflows. e.g. Java with Gradle (github), Publish Java Package with Gradle (github), gitleaks (pre-commit and action), gradle versions plugin
+
+Also forge branch and fabric branch have different licenses?????
