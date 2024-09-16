@@ -2,15 +2,19 @@
 //file:noinspection GroovyAccessibility
 //file:noinspection GradlePackageVersionRange
 plugins {
-	id "fabric-loom" version "1.5.+"
+	id "fabric-loom" version "1.+"
 	id "io.github.p03w.machete" version "1.+" // automatic jar compressing on build
 	id "maven-publish"
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+java {
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+}
 
-archivesBaseName = project.archives_base_name
+base {
+	archivesName = project.archives_base_name
+}
 group = project.maven_group
 
 // Formats the mod version to include the Minecraft version and build number (if present)
@@ -20,8 +24,21 @@ version = "${mod_version}+${minecraft_version}" + (buildNumber != null ? "-${bui
 
 repositories {
 	maven { url = "https://maven.shedaniel.me/" } // Cloth Config, REI
-	maven { url = "https://maven.blamejared.com/" } // JEI
-	maven { url = "https://modmaven.dev"} //JEI Backup
+	maven {
+		// location of the maven that hosts JEI files before January 2023
+		name = "Progwml6's maven"
+		url = "https://dvs1.progwml6.com/files/maven/"
+	}
+	maven {
+		// location of the maven that hosts JEI files since January 2023
+		name = "Jared's maven"
+		url = "https://maven.blamejared.com/"
+	}
+	maven {
+		// location of a maven mirror for JEI files, as a fallback
+		name = "ModMaven"
+		url = "https://modmaven.dev"
+	}
 	maven { url = "https://maven.parchmentmc.org" } // Parchment mappings
 	maven { url = "https://maven.quiltmc.org/repository/release" } // Quilt Mappings
 	maven { url = "https://api.modrinth.com/maven" } // LazyDFU
@@ -32,6 +49,11 @@ repositories {
 	maven { url = "https://maven.jamieswhiteshirt.com/libs-release" } // Reach Entity Attributes
 	maven { url = "https://jitpack.io/" } // Mixin Extras, Fabric ASM
 	maven { url = "https://maven.tterrag.com/" } // Flywheel
+	maven {
+		// EMI
+		name = "TerraformersMC"
+		url = "https://maven.terraformersmc.com/"
+	}
 }
 
 configurations.configureEach {
@@ -63,18 +85,17 @@ dependencies {
 	// Recipe Viewers - Create Fabric supports JEI, REI, and EMI.
 	// See root gradle.properties to choose which to use at runtime.
 	switch (recipe_viewer.toLowerCase(Locale.ROOT)) {
-		case "jei": modLocalRuntime("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}"); break
-		case "rei": modLocalRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"); break
-		case "emi": modLocalRuntime("dev.emi:emi:${emi_version}"); break
+		case "jei": modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}"); break
+		case "rei": modRuntimeOnly("me.shedaniel:RoughlyEnoughItems-fabric:${rei_version}"); break
+		case "emi": modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}"); modLocalRuntime("dev.emi:emi-fabric:${emi_version}"); break
 		case "disabled": break
 		default: println("Unknown recipe viewer specified: ${recipe_viewer}. Must be JEI, REI, EMI, or disabled.")
 	}
 	// if you would like to add integration with them, uncomment them here.
-	modCompileOnly("mezz.jei:jei-${minecraft_version}-fabric:${jei_version}")
-//    modCompileOnly("mezz.jei:jei-${minecraft_version}-common:${jei_fabric_version}")
-//    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}")
-//    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}")
-//    modCompileOnly("dev.emi:emi:${emi_version}")
+	modCompileOnlyApi("mezz.jei:jei-${minecraft_version}-fabric-api:${jei_version}")
+//	modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}")
+//	modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}")
+	modCompileOnly("dev.emi:emi-fabric:${emi_version}:api")
 }
 
 processResources {
@@ -84,7 +105,8 @@ processResources {
 			"fabric_loader_version", fabric_loader_version,
 			"fabric_api_version", fabric_api_version,
 			"create_version", create_version,
-			"minecraft_version", minecraft_version
+			"minecraft_version", minecraft_version,
+			"minimum_fabric_loader_version", minimum_fabric_loader_version
 	)
 
 	inputs.properties(properties)
